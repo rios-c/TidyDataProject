@@ -27,7 +27,7 @@ names(testy) = "ActivityCode";
 testx$ActivityCode = testy$ActivityCode;
 testx$Subject = subjecttest$V1;
 
-# Lable Activity 
+# Label test data Activity 
 testx$Activity = activity[ activity[testx$ActivityCode, 1], 2];
 
 # Add columns names to the train data
@@ -36,8 +36,14 @@ names(trainy) = "ActivityCode";
 trainx$ActivityCode = trainy$ActivityCode;
 trainx$Subject = subjecttrain$V1;
 
+# Label training data Activity
 trainx$Activity = activity[ activity[trainx$ActivityCode, 1], 2];
 
+# concatenate the two datasets to a master dataset.
 x = rbind( testx, trainx);
+
+# Extract or subset data columns of interest.
 tidyData = x[ , c("Activity", "ActivityCode", "Subject", tidyFeatures[1:6,2]) ];
+
+# Save tidy dataset
 write.table(tidyData, file="./tidyData.txt", sep=" ", row.names=F);
